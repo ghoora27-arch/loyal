@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mauritius Bags — Shop</title>
+  <meta name="description" content="Professional online store for backpacks, laptop bags, handbags, suitcases, wallets and travel gear — contact & buy on WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#1f6feb;
+      --muted:#6b7280;
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --radius:14px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f1724;}
+    .container{max-width:1160px;margin:28px auto;padding:0 20px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6a9cff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px}
+    .site-title{line-height:1}
+    .site-title h1{margin:0;font-size:18px}
+    .site-title p{margin:0;color:var(--muted);font-size:13px}
+
+    .search{flex:1;max-width:520px}
+    .search input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e6e9ef;background:white;font-size:14px}
+
+    nav.categories{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+    .chip{background:var(--card);padding:8px 12px;border-radius:999px;border:1px solid #eef2f7;color:var(--muted);cursor:pointer;font-weight:600}
+    .chip.active{background:linear-gradient(90deg, rgba(31,111,235,0.12), rgba(106,156,255,0.06));border-color:rgba(31,111,235,0.18);color:var(--accent)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 20px rgba(15,23,36,0.06);display:flex;flex-direction:column;gap:8px}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    .card h3{margin:0;font-size:16px}
+    .price{font-weight:700;color:#0b1220}
+    .desc{color:var(--muted);font-size:13px}
+    .actions{display:flex;gap:8px;align-items:center;margin-top:auto}
+    .btn{padding:10px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn-buy{background:linear-gradient(90deg,var(--accent),#2b9aff);color:white}
+    .btn-details{background:#f3f6fb;color:var(--accent)}
+
+    footer{margin:36px 0;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Responsive tweaks */
+    @media (max-width:600px){
+      .logo{width:46px;height:46px}
+      .search{display:none}
+    }
+
+    /* small utility */
+    .badge{background:#eef2ff;color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">MB</div>
+        <div class="site-title">
+          <h1>Mauritius Bags</h1>
+          <p>Quality bags • Ship across Mauritius</p>
+        </div>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search products, e.g. backpack, wallet..." />
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="badge">WhatsApp</div>
+        <a id="waTop" href="#" target="_blank" style="text-decoration:none;color:var(--accent);font-weight:700">+230 5888 3610</a>
+      </div>
+    </header>
+
+    <nav class="categories" id="categories">
+      <!-- Categories will be injected by JS -->
+    </nav>
+
+    <main>
+      <section class="grid" id="productGrid">
+        <!-- Product cards injected by JS -->
+      </section>
+    </main>
+
+    <footer>
+      Created for Mauritius — Pay via WhatsApp. Replace images and details with your own products. <br>
+      Need help customizing? Reply and I'll update the file.
+    </footer>
+  </div>
+
+  <!-- ---------- SAMPLE DATA & SCRIPTS -------------- -->
+  <script>
+    /*
+      IMPORTANT:
+      - This single-file HTML is ready to use offline. Save it as "index.html" and open in a browser.
+      - Your WhatsApp number (as provided) is: +23058883610 — used for "Buy Now" links below.
+      - To add products: modify the `products` array below. Fields: id, name, category, price, img, desc.
+      - The buy button opens WhatsApp with a pre-filled message which includes product name and price. Customers can complete the order there.
+    */
+
+    const WA_NUMBER = '23058883610'; // Mauritius number without + and any symbols
+
+    const categories = ['All','Backpack','Laptop bags','Handbags','Suitcases','Wallets','Travel bag','Lunch bags'];
+
+    const products = [
+      {id:1,name:'Urban Explorer Backpack',category:'Backpack',price:'1,650 MUR',img:'https://i5.walmartimages.com/seo/Damyuan-Running-Shoes-Men-Fashion-Sneakers-Slip-on-Casual-Walking-Shoes-Sport-Athletic-Shoes-Lightweight-Breathable-Comfortable_4114141f-7d26-4dd7-933d-babc24080395.516ad145e1a1d8d82a801ac48231950d.jpeg',desc:'Durable, water-resistant daypack with laptop sleeve.'},
+      {id:2,name:'Slim Laptop Sleeve 15"',category:'Laptop bags',price:'950 MUR',img:'https://images.unsplash.com/photo-1580894908360-9ca6d3e5e7a0?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2',desc:'Soft padded sleeve for 13–15 inch laptops.'},
+      {id:3,name:'Everyday Leather Handbag',category:'Handbags',price:'2,490 MUR',img:'https://images.unsplash.com/photo-1539883372547-7a33b0d0d5c7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3',desc:'Elegant leather tote with inner pockets.'},
+      {id:4,name:'Traveller Large Suitcase',category:'Suitcases',price:'5,200 MUR',img:'https://images.unsplash.com/photo-1542293787938-c9e299b88039?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=4',desc:'Lightweight hardshell with 360° wheels.'},
+      {id:5,name:'Classic Wallet',category:'Wallets',price:'490 MUR',img:'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5',desc:'Slim bi-fold with RFID protection.'},
+      {id:6,name:'Weekend Travel Bag',category:'Travel bag',price:'1,980 MUR',img:'https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6',desc:'Spacious duffel with shoe compartment.'},
+      {id:7,name:'Kids Lunch Bag',category:'Lunch bags',price:'420 MUR',img:'https://images.unsplash.com/photo-1526318472351-c75fcf070c05?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7',desc:'Insulated lunch bag, easy-clean lining.'}
+    ];
+
+    // Build categories UI
+    const catContainer = document.getElementById('categories');
+    categories.forEach((c,i)=>{
+      const btn = document.createElement('button');
+      btn.className = 'chip' + (i===0? ' active':'');
+      btn.textContent = c;
+      btn.dataset.cat = c;
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+        btn.classList.add('active');
+        renderProducts();
+      });
+      catContainer.appendChild(btn);
+    });
+
+    // Render products
+    const grid = document.getElementById('productGrid');
+
+    function renderProducts(){
+      const active = document.querySelector('.chip.active').dataset.cat;
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      grid.innerHTML = '';
+      const filtered = products.filter(p=>{
+        const matchCat = active==='All' || p.category===active;
+        const matchQuery = q==='' || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+        return matchCat && matchQuery;
+      });
+
+      if(filtered.length===0){
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px;background:linear-gradient(180deg,#fff, #fbfdff);border-radius:12px">No products found. Add items to the <code>products</code> array in the HTML file.</div>';
+        return;
+      }
+
+      filtered.forEach(p=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" loading="lazy" />
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <div>
+              <h3>${p.name}</h3>
+              <div class="desc">${p.category} • ${p.desc}</div>
+            </div>
+            <div style="text-align:right">
+              <div class="price">${p.price}</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-buy" data-id="${p.id}">Buy on WhatsApp</button>
+            <button class="btn btn-details" onclick="showDetails(${p.id})">Details</button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      // attach event listeners for buy buttons
+      document.querySelectorAll('.btn-buy').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          const id = Number(btn.dataset.id);
+          const product = products.find(x=>x.id===id);
+          if(!product) return;
+          const message = encodeURIComponent(`Hello! I would like to purchase *${product.name}* priced at ${product.price}. My name: \nShipping address (city): \nAny questions:`);
+          const url = `https://wa.me/${WA_NUMBER}?text=` + message;
+          window.open(url, '_blank');
+        });
+      });
+
+      // update top wa link
+      const waTop = document.getElementById('waTop');
+      waTop.href = `https://wa.me/${WA_NUMBER}`;
+      waTop.textContent = '+230 5888 3610';
+
+    }
+
+    // simple details modal (browser alert for simplicity)
+    function showDetails(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      alert(`${p.name}\n\nCategory: ${p.category}\nPrice: ${p.price}\n\n${p.desc}\n\nTo buy: click Buy on WhatsApp.`);
+    }
+
+    // wire up search
+    document.getElementById('searchInput').addEventListener('input', ()=>renderProducts());
+
+    // initial render
+    renderProducts();
+
+  </script>
+</body>
+</html>
